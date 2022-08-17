@@ -38,11 +38,14 @@ let getDecimalFromBinaryWithStringReplacement = string => {
   ->parseInt(2)
 }
 
-let getSeatId = ([row, column]) => row * 8 + column
+let getSeatIdFromRowAndColumn = ([row, column]) => row * 8 + column
 
-puzzleInput
-->Array.map(boardingPass =>
-  boardingPass->splitByIndex(7)->Array.map(getDecimalFromBinaryWithArray)->getSeatId
-)
-->Js.Math.maxMany_int
-->Js.log
+let getSeatIdsFromInput = input =>
+  input->Array.map(boardingPass =>
+    boardingPass
+    ->splitByIndex(7)
+    ->Array.map(getDecimalFromBinaryWithArray)
+    ->getSeatIdFromRowAndColumn
+  )
+
+puzzleInput->getSeatIdsFromInput->Js.Math.maxMany_int->Js.log
